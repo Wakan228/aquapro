@@ -6,7 +6,7 @@
 			<div class="content-article">
 									<h1>Акції</h1>
 					<div class="text">
-						<p><a href="/aktsii/privedi-druga-i-poluchi-butyl-vody-besplatno/"></a></p><a href="/aktsii/privedi-druga-i-poluchi-butyl-vody-besplatno/">
+						<p><a href="{{route('privedi-druga-i-poluchi-butyl-vody-besplatno')}}"></a></p><a href="{{route('privedi-druga-i-poluchi-butyl-vody-besplatno')}}">
 <div class="list-promo">
 <div class="item item-1">
 <div>
@@ -15,8 +15,8 @@
 <p></p></div>
 <p></p></div>
 </div>
-</a><p><a href="/aktsii/privedi-druga-i-poluchi-butyl-vody-besplatno/"></a><br>
-<a href="/aktsii/kupy-kuler-ta-otrymaj-2-butli-vody-u-podarunok/"></a></p><a href="/aktsii/kupy-kuler-ta-otrymaj-2-butli-vody-u-podarunok/">
+</a><p><a href="{{route('privedi-druga-i-poluchi-butyl-vody-besplatno')}}"></a><br>
+<a href="{{route('kupy-kuler-ta-otrymaj-2-butli-vody-u-podarunok')}}"></a></p><a href="{{route('kupy-kuler-ta-otrymaj-2-butli-vody-u-podarunok')}}">
 <div class="list-promo">
 <div class="item item-2">
 <div>
@@ -25,8 +25,8 @@
 <p></p></div>
 <p></p></div>
 </div>
-</a><p><a href="/aktsii/kupy-kuler-ta-otrymaj-2-butli-vody-u-podarunok/"></a><br>
-<a href="/aktsii/novym-kliyentam-butel-vody-u-podarunok-ta-znyzhka-na-pompu-40/"></a></p><a href="/aktsii/novym-kliyentam-butel-vody-u-podarunok-ta-znyzhka-na-pompu-40/">
+</a><p><a href="{{route('kupy-kuler-ta-otrymaj-2-butli-vody-u-podarunok')}}"></a><br>
+<a href="{{route('novym-kliyentam-butel-vody-u-podarunok-ta-znyzhka')}}"></a></p><a href="{{route('novym-kliyentam-butel-vody-u-podarunok-ta-znyzhka')}}">
 <div class="list-promo">
 <div class="item item-3">
 <div>
@@ -35,7 +35,7 @@
 <p></p></div>
 <p></p></div>
 </div>
-</a><p><a href="/aktsii/novym-kliyentam-butel-vody-u-podarunok-ta-znyzhka-na-pompu-40/"></a></p>
+</a><p><a href="{{route('novym-kliyentam-butel-vody-u-podarunok-ta-znyzhka')}}"></a></p>
 					</div>
 							</div>
 		</div>

@@ -25,6 +25,15 @@ Route::get('/stock', [App\Http\Controllers\HomeController::class, 'stock'])->nam
 Route::get('/store', [App\Http\Controllers\HomeController::class, 'store'])->name('store');
 Route::get('/cart', [App\Http\Controllers\HomeController::class, 'cart'])->name('cart');
 Route::get('/login', [App\Http\Controllers\HomeController::class, 'login'])->name('login');
+Route::get('/stock/kupy-kuler-ta-otrymaj-2-butli-vody-u-podarunok',function () {
+    return view('stock/kupy-kuler-ta-otrymaj-2-butli-vody-u-podarunok');
+})->name('kupy-kuler-ta-otrymaj-2-butli-vody-u-podarunok');
+Route::get('/stock/novym-kliyentam-butel-vody-u-podarunok-ta-znyzhka',function () {
+    return view('stock/novym-kliyentam-butel-vody-u-podarunok-ta-znyzhka');
+})->name('novym-kliyentam-butel-vody-u-podarunok-ta-znyzhka');
+Route::get('/stock/privedi-druga-i-poluchi-butyl-vody-besplatno', function () {
+    return view('stock/privedi-druga-i-poluchi-butyl-vody-besplatno');
+})->name('privedi-druga-i-poluchi-butyl-vody-besplatno');
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
