@@ -42,11 +42,11 @@
 </head>
 <body>
 	@include('layouts.storeLabel')
-	@include('layouts.mobile')
-	@include('layouts.header')
-	@include('layouts.baner')
+	<x-mobile />
+	<x-header />
+	<x-baner />
 		@yield('contant')
-	@include('layouts.footer')
+	<x-footer />
 	<script type="text/javascript" src="{{ asset('js/slick.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('js/wow.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('js/remodal.js')}}"></script>
