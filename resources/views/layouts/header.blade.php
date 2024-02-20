@@ -16,9 +16,23 @@
                 </a>
 			</div>
 			<div class="right">
-				<div class="prifile">
-									<a href="{{route('login')}}"><img src="https://image.flaticon.com/icons/svg/1077/1077114.svg" alt=""> Увійти</a>
+				
+								
+								@if(auth()->check())
+									<div class="prifile">
+										<a href="https://aquapro.ua/my-account/">
+											{{auth()->user()->email}}
+											<img src="https://image.flaticon.com/icons/svg/1077/1077114.svg" alt="">
+											
+										</a>
 								</div>
+									@else
+									<div class="prifile">
+										<a href="{{route('my-account.login-account')}}"><img src="https://image.flaticon.com/icons/svg/1077/1077114.svg" alt=""> Увійти</a>
+									</div>
+									@endif
+	
+								
 				<div class="lang">
 											<span>uk</span>
 						<div class="lang-drop"><a class="active d-none" data-link="{{route('main')}}" href="{{route('main')}}" hreflang="uk" title="Українська">uk</a><a class=""  href="{{route('main')}}" hreflang="ru" title="Русский">ru</a></div>									</div>

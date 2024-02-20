@@ -1,7 +1,6 @@
-@extends('layouts.blockInside')
-@section('link_map')
-@endsection
-@section('block_contant')
+{{-- @extends('layouts.app')
+
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -71,11 +70,16 @@
         </div>
     </div>
 </div>
+@endsection --}}
 
 
+@extends('layouts.blockInside')
+@section('link_map')
+@endsection
+@section('block_contant')
 <div class="content">
 			<div class="content-article">
-								                            <h1>Профіль</h1>
+								                            <h1>{{__('messages.Profile')}}</h1>
 				    					<div class="text">
 						<div class="woocommerce"><div class="woocommerce-notices-wrapper"></div>
 
@@ -86,16 +90,27 @@
 
 		<h2>Увійти</h2>
 
-		<form class="woocommerce-form woocommerce-form-login login"  method="post">
-
+		<form method="POST" action="{{ route('login') }}" class="woocommerce-form woocommerce-form-login login" >
+            @csrf
 			
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 				<label for="username">Ім'я користувача чи адреса електронної пошти&nbsp;<span class="required">*</span></label>
-				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" autocomplete="username" value="">			</p>
-			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+				<input type="text" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="username"  value="">			</p>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </p>
+            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 				<label for="password">Пароль&nbsp;<span class="required">*</span></label>
 				<span class="password-input"><input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password"><span class="show-password-input"></span></span>
-			</p>
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </p>
 
 			
 			<p class="form-row">
@@ -118,18 +133,26 @@
 
 		<h2>Реєстрація</h2>
 
-		<form method="POST" action="{{ route('register') }}" class="woocommerce-form woocommerce-form-register register">
+		<form action="{{ route('register') }}" method="post" class="woocommerce-form woocommerce-form-register register">
             @csrf
-			        <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-            <label for="reg_shipping_phone">Телефон&nbsp;<span class="required">*</span></label>
-            <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="shipping_phone" id="reg_shipping_phone" value="">
-        </p>
-    
-			
-			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-				<label for="reg_email">Адреса електронної пошти&nbsp;<span class="required">*</span></label>
+                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+				<label for="reg_email">{{__("messages.Email address")}}&nbsp;<span class="required">*</span></label>
 				<input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autocomplete="email" value="">			</p>
+               @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+				<label for="phone">{{__("messages.Phone")}}&nbsp;<span class="required">*</span></label>
+				<input type="phone" class="woocommerce-Input woocommerce-Input--text input-text" name="phone" id="phone" value="">			</p>
+                @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
 
+			
 			
 				<p>На вашу email адресу буде надіслано пароль.</p>
 
@@ -137,7 +160,8 @@
 			<div class="woocommerce-privacy-policy-text"><p>Ваші особисті дані будуть використані для підтримки вашого досвіду на цьому веб-сайті, для управління доступом до вашого облікового запису та для інших цілей, описаних у нашому <a href="https://aquapro.ua/privacy-policy/" class="woocommerce-privacy-policy-link" target="_blank">політика конфіденційності</a>.</p>
 </div>
 			<p class="woocommerce-FormRow form-row">
-				<input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="52377e6a3b"><input type="hidden" name="_wp_http_referer" value="/my-account/edit-account/">				<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Реєстрація">Реєстрація</button>
+				<input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="52377e6a3b"><input type="hidden" name="_wp_http_referer" value="/my-account/edit-account/">			
+                	<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Реєстрація">Реєстрація</button>
 			</p>
 
 			
@@ -151,4 +175,4 @@
 					</div>
 							</div>
 		</div>
-@endsection
+		@endsection

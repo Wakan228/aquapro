@@ -83,7 +83,9 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ua',
+
+    'locales' => ['ua', 'ru', 'en'],
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +170,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Services\Localization\LocalizationServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -183,6 +186,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'LocalizationService' => App\Services\Localization\LocalizationServiceProvider::class,
     ])->toArray(),
 
 ];

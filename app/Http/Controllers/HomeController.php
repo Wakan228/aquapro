@@ -26,33 +26,44 @@ class HomeController extends Controller
         return view('home');
     }
 
-    static function aboutCompany(){
+    static function aboutCompany()
+    {
         return view('app/aboutCompany');
-   }
-   static function aboutWater(){
+    }
+    static function aboutWater()
+    {
         return view('app/aboutWater');
-   }
-   static function blog(){
+    }
+    static function blog()
+    {
         return view('app/blog');
-   }
-   static function contacts(){
+    }
+    static function contacts()
+    {
         return view('app/contacts');
-   }
-   static function delivery(){
+    }
+    static function delivery()
+    {
         return view('app/delivery');
-   }
-   static function stock(){
+    }
+    static function stock()
+    {
         return view('app/stock');
-   }
-   static function store(){
+    }
+    static function store()
+    {
         return view('app/store');
-   }
-   static function cart(){
+    }
+    static function cart()
+    {
         return view('app/cart');
-   }
-   static function login(){
-        return view('app/login');
-   }
-
-
+    }
+    static function login()
+    {
+        return view('auth/login');
+    }
+    static function editAccount()
+    {
+        return view('auth/edit');
+    }
 }

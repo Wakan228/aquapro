@@ -47,10 +47,16 @@
 	@include('layouts.baner')
 		@yield('contant')
 	@include('layouts.footer')
+	{{-- <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  	<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> --}}
 	<script type="text/javascript" src="{{ asset('js/slick.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('js/wow.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('js/remodal.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('js/inputmask.min.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('js/scripts.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('js/phone_mask.js')}}"></script>
+	<script>
+		$('#phone').mask("+380999999999")
+	</script>
 </body>
 </html>
