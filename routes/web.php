@@ -34,7 +34,7 @@ Route::group(
 
 
         // Route::post('/register', [RegisterController::class])->name('registration');
-        Auth::routes(['verify' => true]);
+        Auth::routes();
 
         Route::get('/aboutCompany', [App\Http\Controllers\HomeController::class, 'aboutCompany'])->name('aboutCompany');
         Route::get('/aboutWater', [App\Http\Controllers\HomeController::class, 'aboutWater'])->name('aboutWater');
