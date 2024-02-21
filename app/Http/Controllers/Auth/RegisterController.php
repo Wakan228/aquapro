@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\User\PasswordMail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -66,6 +68,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $password = Str::random(12);
+        Mail::to($data['email'])->send(new PasswordMail($password));
         return User::create([
             'email' => $data['email'],
             'phone' => $data['phone'],

@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/remodal.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/remodal-default-theme.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}" />
-
+	
 	<!-- JS -->
 	<script type="text/javascript" src="{{ asset('js/jquery-1.11.0.min.js')}}"></script>
 	<script>
@@ -42,6 +42,7 @@
 </head>
 <body>
 	@include('layouts.storeLabel')
+	
 	@include('layouts.mobile')
 	@include('layouts.header')
 	@include('layouts.baner')

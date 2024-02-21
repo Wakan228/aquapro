@@ -77,6 +77,10 @@
 @section('link_map')
 @endsection
 @section('block_contant')
+<style>
+    
+</style>
+@include('layouts.popup')
 <div class="content">
 			<div class="content-article">
 								                            <h1>{{__('messages.Profile')}}</h1>
@@ -161,11 +165,12 @@
 </div>
 			<p class="woocommerce-FormRow form-row">
 				<input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="52377e6a3b"><input type="hidden" name="_wp_http_referer" value="/my-account/edit-account/">			
-                	<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Реєстрація">Реєстрація</button>
+                	
 			</p>
 
 			
 		</form>
+        <button onclick="openModal()" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Реєстрація">Реєстрація</button>
 
 	</div>
 
