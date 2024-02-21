@@ -35,6 +35,7 @@
     <span class="close-btn" onclick="closeModal()">×</span>
     <h2>Введите код из SMS</h2>
     <input type="text" id="sms-code-input" placeholder="Код из SMS" maxlength="6" minlength="6">
+    @livewire('phone-verification')
     <button onclick="submitCode()">Подтвердить</button>
   </div>
 </div>

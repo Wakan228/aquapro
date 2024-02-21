@@ -69,6 +69,7 @@ class RegisterController extends Controller
     {
         $password = Str::random(12);
         Mail::to($data['email'])->send(new PasswordMail($password));
+
         return User::create([
             'email' => $data['email'],
             'phone' => $data['phone'],
