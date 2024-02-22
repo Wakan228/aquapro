@@ -35,23 +35,92 @@
     <span class="close-btn" onclick="closeModal()">×</span>
     <h2>Введите код из SMS</h2>
     <input type="text" id="sms-code-input" placeholder="Код из SMS" maxlength="6" minlength="6">
-    @livewire('phone-verification')
     <button onclick="submitCode()">Подтвердить</button>
+    <h1 id="timer">Осталось времени : </h1>
   </div>
 </div>
 <script>
+  function submitCode(){
+    var hiddenField = document.createElement('input');
+    hiddenField.type = 'hidden';
+    hiddenField.name = 'code';
+    hiddenField.value = $('#sms-code-input').val();
+
+    // Находим контейнер, куда добавим скрытое поле
+    var container = document.getElementById('registartion-form');
+
+    // Добавляем скрытое поле в контейнер
+    container.appendChild(hiddenField);
+    document.getElementById('registartion-form').submit()
+  }
+  function sendPhone(){
+    var phoneValue = document.getElementById('phone').value;
+
+    // Создаем объект FormData для удобной передачи данных
+    var formData = new FormData();
+    formData.append('phone', phoneValue);
+    var headers = new Headers();
+    var csrfTokenInput = document.querySelector('input[name="_token"]');
+    var csrfToken = csrfTokenInput.value;
+    headers.append('X-CSRF-TOKEN', csrfToken);
+
+    fetch('{{route("set-code-verify")}}', {
+        method: 'POST',
+        headers: headers,
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      if(data.status == 201){
+          document.getElementById('modalOverlay').style.display = 'flex';
+          document.getElementById('sms-code-input').focus();
+          startTimer(data.time_out);  
+        }else{
+          return response.text().then(html => {
+                displayErrorPage(html);
+        })
+      }
+    })
+    .catch(error => {
+      //window.location.href = '{{route("my-account.login-account")}}';
+        // Обработка ошибок
+        console.error('ааАААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА', error);
+    });
+  }
+</script>
+<script>
+ function startTimer(seconds) {
+    var timerElement = document.getElementById('timer');
+
+    var intervalId = setInterval(function() {
+        if (seconds <= 0) {
+            clearInterval(intervalId);
+            timerElement.innerHTML = 'Время вышло!';
+        } else {
+            timerElement.innerHTML = 'Осталось времени: ' + formatTime(seconds);
+            seconds--;
+        }
+    }, 1000);
+}
+
+function formatTime(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var remainingSeconds = seconds % 60;
+
+    // Добавляем ведущий ноль для однозначных цифр
+    if (remainingSeconds < 10) {
+        remainingSeconds = '0' + remainingSeconds;
+    }
+
+    return minutes + ':' + remainingSeconds;
+}
+
     function openModal() {
-        document.getElementById('modalOverlay').style.display = 'flex';
-        document.getElementById('sms-code-input').focus();
+        sendPhone()
     }
 
     function closeModal() {
         document.getElementById('modalOverlay').style.display = 'none';
     }
-    function submitCode() {
-    // Добавьте ваш код для обработки введенного кода
-    // Например, отправка запроса на сервер для проверки кода
-    alert('Код успешно подтвержден!');
-    closeModal();
-  }
 </script>

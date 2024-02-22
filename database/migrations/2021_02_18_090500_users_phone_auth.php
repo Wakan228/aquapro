@@ -14,33 +14,33 @@ class UsersPhoneAuth extends Migration
     public function up()
     {
         if (Schema::hasTable('users')) {
-            if (!Schema::hasColumn('users', 'phone')) {
-                Schema::table('users', function (Blueprint $table) {
-                    if (!Schema::hasColumn('users', 'phone')) {
-                        $table->string('phone')->unique()->nullable()->after("id");
-                    }
+            // if (!Schema::hasColumn('users', 'phone')) {
+            //     Schema::table('users', function (Blueprint $table) {
+            //         if (!Schema::hasColumn('users', 'phone')) {
+            //             $table->string('phone')->unique()->nullable()->after("id");
+            //         }
 
-                    if (!Schema::hasColumn('users', 'phone_verified')) {
-                        $table->boolean('phone_verified')->default(false)->after("phone");
-                    }
+            //         if (!Schema::hasColumn('users', 'phone_verified')) {
+            //             $table->boolean('phone_verified')->default(false)->after("phone");
+            //         }
 
-                    if (!Schema::hasColumn('users', 'phone_verified_at')) {
-                        $table->timestamp('phone_verified_at')->nullable()->after("phone_verified");
-                    }
+            //         if (!Schema::hasColumn('users', 'phone_verified_at')) {
+            //             $table->timestamp('phone_verified_at')->nullable()->after("phone_verified");
+            //         }
 
-                    if (Schema::hasColumn('users', 'email')) {
-                        $table->string('email')->nullable()->change();
-                    }
+            //         if (Schema::hasColumn('users', 'email')) {
+            //             $table->string('email')->nullable()->change();
+            //         }
 
-                    if (Schema::hasColumn('users', 'name')) {
-                        $table->string('name')->nullable()->change();
-                    }
+            //         if (Schema::hasColumn('users', 'name')) {
+            //             $table->string('name')->nullable()->change();
+            //         }
 
-                    if (Schema::hasColumn('users', 'password')) {
-                        $table->string('password')->nullable()->change();
-                    }
-                });
-            }
+            //         if (Schema::hasColumn('users', 'password')) {
+            //             $table->string('password')->nullable()->change();
+            //         }
+            //     });
+            // }
 
             if (!Schema::hasTable('phone_verification_codes')) {
                 Schema::create('phone_verification_codes', function (Blueprint $table) {
@@ -50,8 +50,7 @@ class UsersPhoneAuth extends Migration
                         ->nullable()
                         ->constrained()
                         ->onUpdate('cascade')
-                        ->onDelete('cascade')
-                    ;
+                        ->onDelete('cascade');
 
                     $table->ipAddress('ip');
                     $table->string('phone');
@@ -68,19 +67,16 @@ class UsersPhoneAuth extends Migration
 
                     $table->ipAddress('ip');
                     $table->foreignId('user_id')
-                            ->nullable()
-                            ->constrained()
-                            ->onUpdate('cascade')
-                            ->onDelete('cascade')
-                    ;
+                        ->nullable()
+                        ->constrained()
+                        ->onUpdate('cascade')
+                        ->onDelete('cascade');
                     $table->string('phone');
 
                     $table->timestamps();
                 });
             }
         }
-
-
     }
 
     /**

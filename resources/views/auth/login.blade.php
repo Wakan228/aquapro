@@ -77,6 +77,7 @@
 @section('link_map')
 @endsection
 @section('block_contant')
+@include('layouts.popup')
 <div class="content">
 			<div class="content-article">
 								                            <h1>{{__('messages.Profile')}}</h1>
@@ -133,7 +134,7 @@
 
 		<h2>Реєстрація</h2>
 
-		<form action="{{ route('register') }}" method="post" class="woocommerce-form woocommerce-form-register register">
+		<form action="{{ route('register') }}" id="registartion-form" method="POST" class="woocommerce-form woocommerce-form-register register">
             @csrf
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 				<label for="reg_email">{{__("messages.Email address")}}&nbsp;<span class="required">*</span></label>
@@ -161,12 +162,12 @@
 </div>
 			<p class="woocommerce-FormRow form-row">
 				<input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="52377e6a3b"><input type="hidden" name="_wp_http_referer" value="/my-account/edit-account/">			
-                	<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Реєстрація">Реєстрація</button>
+                	
 			</p>
 
 			
 		</form>
-
+<button onclick="openModal()" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Реєстрація">Реєстрація</button>
 	</div>
 
 </div>

@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\User\PasswordMail;
 use App\Models\User;
+use App\Models\Phone;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Rules\Phone\CorrectCode;
+use GuzzleHttp\Psr7\Request;
 
 class RegisterController extends Controller
 {
@@ -29,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'my-account/edit-account';
+    protected $redirectTo = '/my-account/edit-account';
 
     /**
      * Create a new controller instance.
@@ -50,10 +55,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-
             'email' => ['required', 'string', 'email', 'max:320', 'unique:users'],
-            'phone' => ['required', 'regex:/^\+380(\d{9})$/'],
-            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required', 'regex:/^\+380(\d{9})$/', 'unique:users'],
+            'code' => ['required', 'min:6', 'max:6', new CorrectCode],
         ]);
     }
 
@@ -66,12 +70,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $password = Str::random(12);
-<<<<<<< HEAD
         Mail::to($data['email'])->send(new PasswordMail($password));
-
-=======
->>>>>>> parent of d84f1de (add sms)
-        return User::create([
+        $user =  User::create([
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' =>  Hash::make($password),
@@ -79,9 +79,15 @@ class RegisterController extends Controller
             'name' => '',
             'surname' => '',
             'adress_id' => null,
-            'verified' => false,
+            'verified' => true,
             'invite_code' => ''
             // 'password' => Hash::make($data['password']),
         ]);
+        $ip = Phone::getVerification($data);
+        $data['user_id'] = $user->id;
+        $data['ip'] = $ip->ip;
+        Phone::setVerificationConfirm($data);
+
+        return $user;
     }
 }

@@ -26,7 +26,7 @@ Route::group(
             return view('app/main');
         })->name('main');
 
-
+        Route::post('/set-code-verify', [App\Http\Controllers\Auth\PhoneController::class, 'setVerificationCodePhone'])->name('set-code-verify');
         Route::get('/my-account/login-account', [App\Http\Controllers\HomeController::class, 'login'])->name('my-account.login-account');
         Route::get('/my-account/edit-account', [App\Http\Controllers\HomeController::class, 'editAccount'])->middleware('auth')->name('my-account.edit-account');
         Route::middleware(['auth'])->group(function () {

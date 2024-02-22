@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Phone\ConfirmedPhone;
+use App\Http\Controllers\Auth\PhoneController;
+use App\Http\Requests\Phone;
 
 class HomeController extends Controller
 {
@@ -65,5 +68,8 @@ class HomeController extends Controller
     static function editAccount()
     {
         return view('auth/edit');
+    }
+    static function sendVerifyCode(Request $request)
+    {
     }
 }

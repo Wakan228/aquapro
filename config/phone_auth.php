@@ -12,12 +12,14 @@ return [
     "emitSendCode" => false,
     "emitBefore" => false,
     "emitAfter" => false,
-
+    "authorize_token" => 'q82ITVn_tduJsid',
+    "link" => 'https://im.smsclub.mobi/sms/send',
+    "src_addr" => "Zamovlennia",
     "code_length" => 4,
     "code_digits_only" => false,
     "verify_code_dynamic" => false,
     "limit_send_count" => 3,
-    "next_send_after" => 30,
+    "next_send_after" => 240,
     "expire_seconds" => 240,
     "flushCode" => true,
 
