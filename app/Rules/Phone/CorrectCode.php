@@ -17,11 +17,11 @@ class CorrectCode implements ValidationRule
     {
         $ExpiresCode =  Phone::getExpiresCodeAt($value);
         if (!$ExpiresCode) {
-            $fail('Не вірний код');
+            $fail('Incorrect code');
         }
 
         if ($ExpiresCode && now()->diffInSeconds($ExpiresCode->expires_at, false) < 0) {
-            $fail('Час вийшов');
+            $fail('Time out');
         }
     }
 }

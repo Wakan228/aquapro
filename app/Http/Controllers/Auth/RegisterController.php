@@ -78,6 +78,7 @@ class RegisterController extends Controller
             'type_id' => 2,
             'name' => '',
             'surname' => '',
+            'display_name' => preg_replace('/\d/', '', strstr($data['email'], '@', true)),
             'adress_id' => null,
             'verified' => true,
             'invite_code' => ''

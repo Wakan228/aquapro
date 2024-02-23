@@ -31,6 +31,11 @@ class Phone extends Model
             'updated_at' => now(),
         ]);
     }
+
+    static function deleteVerificationCode($data)
+    {
+        return DB::table("confirmed_phones")->where('user_id', $data['user_id'])->latest('created_at')->delete();
+    }
     static function getLastRecordCode($attribute, $phone)
     {
         return  DB::table('phone_verification_codes')
@@ -51,6 +56,13 @@ class Phone extends Model
             ->where('code', $data['code'])
             ->where('phone', $data['phone'])
             ->latest('created_at')
+            ->first();
+    }
+    static function isUniqPhone($phone, $user_id)
+    {
+        return  DB::table('confirmed_phones')
+            ->where('user_id', $user_id)
+            ->where('phone', $phone)
             ->first();
     }
 }

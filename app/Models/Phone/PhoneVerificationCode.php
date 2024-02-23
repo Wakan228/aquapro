@@ -17,11 +17,11 @@ class PhoneVerificationCode extends Model
         'created_at',
         'updated_at',
     ];
-    static function setVerificationCodePhone($request)
+    static function setVerificationCodePhone($phone, $ip)
     {
         return PhoneVerificationCode::create([
-            'ip' => $request->ip(),
-            'phone' => $request->phone,
+            'ip' => $ip,
+            'phone' => $phone,
             'code' => random_int(100000, 999999),
             'expires_at' => now()->addSeconds(config("phone_auth.expire_seconds")),
             'created_at' => now(),

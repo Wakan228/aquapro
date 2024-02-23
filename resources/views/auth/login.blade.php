@@ -77,7 +77,7 @@
 @section('link_map')
 @endsection
 @section('block_contant')
-@include('layouts.popup')
+@include('layouts.popup_login')
 <div class="content">
 			<div class="content-article">
 								                            <h1>{{__('messages.Profile')}}</h1>

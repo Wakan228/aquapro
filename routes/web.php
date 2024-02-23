@@ -26,9 +26,13 @@ Route::group(
             return view('app/main');
         })->name('main');
 
-        Route::post('/set-code-verify', [App\Http\Controllers\Auth\PhoneController::class, 'setVerificationCodePhone'])->name('set-code-verify');
+        //Route::post('/set-code-verify', [App\Http\Controllers\HomeController::class, 'sendVerifyCode'])->name('set-code-verify');
+        Route::post('/set-verification-code', [App\Http\Controllers\HomeController::class, 'setVerificationCode'])->name('set-verification-code');
         Route::get('/my-account/login-account', [App\Http\Controllers\HomeController::class, 'login'])->name('my-account.login-account');
         Route::get('/my-account/edit-account', [App\Http\Controllers\HomeController::class, 'editAccount'])->middleware('auth')->name('my-account.edit-account');
+        Route::post('/my-account/edit-account', [App\Http\Controllers\HomeController::class, 'UpdateUser'])->middleware('auth')->name('my-account.edit-account-post');
+        Route::post('/my-account/edit-account-code', [App\Http\Controllers\HomeController::class, 'UpdateUserCode'])->middleware('auth')->name('my-account.edit-account-post-code');
+        Route::post('/my-account/edit-account-without-code', [App\Http\Controllers\HomeController::class, 'UpdateUserWithoutCode'])->middleware('auth')->name('my-account.edit-account-post-without-code');
         Route::middleware(['auth'])->group(function () {
         });
 

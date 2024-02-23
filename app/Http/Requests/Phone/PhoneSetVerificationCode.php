@@ -25,6 +25,7 @@ class PhoneSetVerificationCode extends FormRequest
     public function rules()
     {
         return  [
+            // 'phone' => ['required', 'regex:/^\+380(\d{9})$/'],
             'phone' => ['required', 'regex:/^\+380(\d{9})$/', 'unique:confirmed_phones', 'unique:users', new LastRecordCode],
             // 'ip' => ['required', new LastRecordCodeIp]
         ];

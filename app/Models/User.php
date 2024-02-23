@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -20,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'display_name',
         'password',
         'type_id',
         'phone',
@@ -47,4 +49,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    static function getPhoneById($id)
+    {
+        return self::where('id', $id)->first();
+    }
+    static function passwordConfirm($user_id, $password)
+    {
+        return self::where('id', $user_id)->where('password', $password)->first();
+    }
+    static function updateUser($user_data, $user_id)
+    {
+        return self::where('id', $user_id)
+            ->update([
+                'phone' => $user_data['phone'],
+                'name' => $user_data['name'],
+                'surname' => $user_data['surname'],
+                'display_name' => $user_data['display_name'],
+                'email' => $user_data['email']
+            ] + (isset($user_data['confirmePassword']) ? ['password' => Hash::make($user_data['confirmePassword'])] : []));
+    }
 }

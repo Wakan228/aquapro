@@ -42,16 +42,17 @@
 <script>
   function submitCode(){
     var hiddenField = document.createElement('input');
+    var myForm = document.getElementById('updateUserForm');
     hiddenField.type = 'hidden';
     hiddenField.name = 'code';
     hiddenField.value = $('#sms-code-input').val();
-
+    myForm.action = "{{route('my-account.edit-account-post-code')}}"
     // Находим контейнер, куда добавим скрытое поле
-    var container = document.getElementById('registartion-form');
+    var container = document.getElementById('updateUserForm');
 
     // Добавляем скрытое поле в контейнер
     container.appendChild(hiddenField);
-    document.getElementById('registartion-form').submit()
+    document.getElementById('updateUserForm').submit()
   }
   function sendPhone(){
     var phoneValue = document.getElementById('phone').value;
@@ -59,12 +60,19 @@
     // Создаем объект FormData для удобной передачи данных
     var formData = new FormData();
     formData.append('phone', phoneValue);
+    formData.append('name', document.getElementById('account_first_name').value);
+    formData.append('surname', document.getElementById('account_last_name').value);
+    formData.append('display_name', document.getElementById('account_display_name').value);
+    formData.append('email', document.getElementById('account_email').value);
+    formData.append('password_current', document.getElementById('password_current').value);
+    formData.append('password', document.getElementById('password').value);
+    formData.append('password_confirmation', document.getElementById('password_confirmation').value);
     var headers = new Headers();
     var csrfTokenInput = document.querySelector('input[name="_token"]');
     var csrfToken = csrfTokenInput.value;
     headers.append('X-CSRF-TOKEN', csrfToken);
 
-    fetch('{{route("set-code-verify")}}', {
+    fetch('{{route("my-account.edit-account-post")}}', {
         method: 'POST',
         headers: headers,
         body: formData
@@ -76,16 +84,23 @@
           document.getElementById('modalOverlay').style.display = 'flex';
           document.getElementById('sms-code-input').focus();
           startTimer(data.time_out);  
-        }else{
-          return response.text().then(html => {
-                displayErrorPage(html);
-        })
-      }
+        }
+        if(data.status == 301){
+            document.getElementById('updateUserForm').submit()
+        }if(data.status == 400){
+           var errors = data.message;
+           console.log(errors)
+           for (var key in errors) {
+              if (errors.hasOwnProperty(key)) {
+                  alert(key + ": " + errors[key][0]);
+              }
+          }
+        }
     })
     .catch(error => {
       //window.location.href = '{{route("my-account.login-account")}}';
         // Обработка ошибок
-        console.error('ааАААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА', error);
+        console.error('error', error);
     });
   }
 </script>

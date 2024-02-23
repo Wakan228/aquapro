@@ -21,7 +21,7 @@
 								@if(auth()->check())
 									<div class="prifile">
 										<a href="https://aquapro.ua/my-account/">
-											{{auth()->user()->email}}
+											{{auth()->user()->display_name}}
 											<img src="https://image.flaticon.com/icons/svg/1077/1077114.svg" alt="">
 											
 										</a>

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Phone\ConfirmedPhone;
 use App\Http\Controllers\Auth\PhoneController;
 use App\Http\Requests\Phone;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -69,7 +72,24 @@ class HomeController extends Controller
     {
         return view('auth/edit');
     }
-    static function sendVerifyCode(Request $request)
+    static function setVerificationCode(Request $request)
     {
+        return PhoneController::setVerificationCodePhone($request->phone, $request->ip());
+    }
+    static function UpdateUser(Request $request)
+    {
+        if (PhoneController::isUniqPhone($request->phone, Auth::user()->id)) {
+            return ['status' => 301];
+        } else {
+            return PhoneController::setVerificationCodePhone($request->phone, $request->ip());
+        }
+    }
+    static function UpdateUserCode(Request $request)
+    {
+        return UserController::existCode($request->input(), Auth::user()->id, $request->ip());
+    }
+    static function UpdateUserWithoutCode(Request $request)
+    {
+        return UserController::updateUser($request->input(), Auth::user()->id);
     }
 }
